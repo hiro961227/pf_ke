@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Swiper demo</title>
+
+ <!-- Link Swiper's CSS -->
+ <link rel="stylesheet" href="./swiper.min.css">
+ <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+ <!-- Swiper -->
+ <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+   <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-5000px, 0px, 0px);">
+     <div class="swiper-slide swiper-slide-active" id="mainTitle">Slide 1</div>
+     <div class="swiper-slide item_list">Slide 2</div>
+     <div class="swiper-slide item_list">Slide 3</div>
+     <div class="swiper-slide item_list">Slide 4</div>
+     <div class="swiper-slide item_list">Slide 5</div>
+     <div class="swiper-slide item_list">Slide 6</div>
+     <div class="swiper-slide item_list">Slide 7</div>
+     <div class="swiper-slide item_list">Slide 8</div>
+     <div class="swiper-slide item_list">Slide 9</div>
+     <div class="swiper-slide item_list">Slide 10</div>
+    </div>
+   <!-- Add Pagination -->
+   <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span>
+    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 3"></span>
+    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span>
+   </div>
+   <!-- Add Arrows -->
+ <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+
+ <!-- Swiper JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./itemData.js"></script>
+ <script src="./swiper.min.js"></script>
+ <script src="./index.js"></script>
+</body>
+</html>
