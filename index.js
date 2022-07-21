@@ -112,40 +112,96 @@ $("body").on("click", function(event) {
     }
 });
 
-//test2
+
+//work 리스트 클론 및 가로스크롤
 var workList = document.querySelector('.work_list');
 var workListItem = document.querySelectorAll('.work_list li');
 var move = 0;
+var listCount = workListItem.length,
+    listWid = 300,
+    listMargin = 40;
+
 
 $('.work_list').hover(function(){
     bodyTag.style.overflow = "hidden";
     document.addEventListener('scroll mousewheel',function(e){
         e.preventDefault();
-    })
+})
 },function(){
     bodyTag.style.overflow = "auto";
     document.addEventListener('scroll mousewheel',function(e){
         e.preventDefault();
-    })
+})
 });
-workListItem.forEach(function(el, idx){
-    el.addEventListener('mousewheel',function(e){
+
+makeClone();
+function makeClone(){
+    for(var i=0; i<listCount; i++){
+        var cloneList = workListItem[i].cloneNode(true);
+        cloneList.classList.add('clone');
+        workList.appendChild(cloneList);
+    }
+    for(var i = listCount -1; i >=0; i-- ){
+        var cloneList = workListItem[i].cloneNode(true);
+        cloneList.classList.add('clone');
+        workList.prepend(cloneList);
+    }
+    updateWid(); //클론한 넓이값
+    setInitialPos(); //중간으로 이동
+    setTimeout(function(){
+        workList.classList.add('moveAni');
+    }, 100);
+}
+function updateWid(){
+    var currentList = document.querySelectorAll('.work_list li');
+    var newListCount = currentList.length;
+
+    var newWid = (listWid + listMargin) * newListCount - listMargin + 'px';
+    workList.style.width = newWid;
+}
+function setInitialPos(){
+    var initialTranslateValue = -(listWid + listMargin) * listCount;
+    workList.style.transform = 'translate('+initialTranslateValue+'px,45%)';
+}
+
+workList.addEventListener('mousewheel',function(e){
         if(e.wheelDelta > 0){
             //up
             try{move = el.previousElementSibling.offsetLeft;
-                //여기에 이전 콘텐츠 어팬드
             }
-            catch{}
+            catch{
+                moveSlide(move - 1);
+            }
         }else{
             //down
             try{move = el.nextElementSibling.offsetLeft;
-                //여기에 다음 콘텐츠 어팬드
             }
-            catch{}
+            catch{
+                moveSlide(move + 1);
+            }
             finally{}
         }
-        workList.style.transform = "translateX(-"+move+"px)";
     });
-});
 
-//콘텐츠 추가
+//버튼일경우
+// nextBtn.addEventListener('click',function(){
+//     moveSlide(move + 1);
+// })
+// prevBtn.addEventListener('click',function(){
+//     moveSlide(move - 1);
+// })
+function moveSlide(num){
+    workList.style.left = -num * (listWid + listMargin) + 'px';
+    move = num;
+
+    if(move == listCount || move == -listCount){
+        setTimeout(function(){
+            workList.classList.remove('moveAni');
+            workList.style.left = '0px';
+            move = 0;
+        }, 500);
+        setTimeout(function(){
+            workList.classList.add('moveAni');
+        }, 600);
+    }
+}
